@@ -1,0 +1,161 @@
+@model IEnumerable<Proj.Domain.Entities.ContaLuz>
+
+<h2 class="text-center">Contas de Luz</h2>
+<p class="d-block text-right">
+    @Html.ActionLink("Adicionar Conta de Luz", "Create", new {}, new { @class = "btn btn-outline-info" })
+</p>
+<table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>ID</th>
+            <th>Data Leitura</th>
+            <th>KW Gasto</th>
+            <th>Valor a pagar</th>
+            <th>Data Pagamento</th>
+            <th>Média Consumo</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th>@item.id</th>
+                <td>@item.dataLeitura.ToString("dd/MM/yyyy")</td>
+                <td>@item.kwGasto</td>
+                <td>R$ @item.valorAPagar</td>
+                <td>@item.dataPagamento.ToString("dd/MM/yyyy")</td>
+                <td>@item.mediaConsumo</td>
+                <td class="text-center">
+                    <a class="btn btn-outline-success" 
+                        asp-controller="ContaLuz" 
+                        asp-action="View" 
+                        asp-route-id="@item.id"><i class="fas fa-eye"></i></a>
+
+                    <a class="btn btn-outline-primary mx-2" 
+                        asp-controller="ContaLuz" 
+                        asp-action="Update" 
+                        asp-route-id="@item.id"><i class="fas fa-edit"></i></a>
+
+                    <a class="btn btn-outline-danger" 
+                        asp-controller="ContaLuz" 
+                        asp-action="Delete" 
+                        asp-route-id="@item.id"><i class="fas fa-trash-alt"></i></a>
+                </td>
+            </tr>
+        }
+        @if (!Model.Any())
+        {
+            <td colspan="7" class="text-center"> Nenhum registro cadastrado </td>
+        }
+    </tbody>
+</table>
+
+@if (Model.Any())
+{
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card">
+                <h5 class="card-header">Menor Consumo</h5>
+                <div class="card-body">
+                    <div class="form-group col-12">
+                        <div class="editor-label">
+                            Data Leitura
+                        </div>
+                        <div class="editor-field">
+                            <input type="text" value="@ViewBag.menorConsumo.dataLeitura.ToString("dd/MM/yyyy")" class="form-control" disabled/>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-12">
+                        <div class="editor-label">
+                            KW Gasto
+                        </div>
+                        <div class="editor-field">
+                            <input type="text" value="@ViewBag.menorConsumo.kwGasto" class="form-control" disabled/>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-12">
+                        <div class="editor-label">
+                            Valor a pagar
+                        </div>
+                        <div class="editor-field">
+                            <input type="text" value="R$ @ViewBag.menorConsumo.valorAPagar" class="form-control" disabled/>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-12">
+                        <div class="editor-label">
+                            Data Pagamento
+                        </div>
+                        <div class="editor-field">
+                            <input type="text" value="@ViewBag.menorConsumo.dataPagamento.ToString("dd/MM/yyyy")" class="form-control" disabled/>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-12">
+                        <div class="editor-label">
+                            Média de Consumo
+                        </div>
+                        <div class="editor-field">
+                            <input type="text" value="@ViewBag.menorConsumo.mediaConsumo" class="form-control" disabled/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="card">
+                <h5 class="card-header">Maior Consumo</h5>
+                <div class="card-body">
+                    <div class="form-group col-12">
+                        <div class="editor-label">
+                            Data Leitura
+                        </div>
+                        <div class="editor-field">
+                            <input type="text" value="@ViewBag.maiorConsumo.dataLeitura.ToString("dd/MM/yyyy")" class="form-control" disabled/>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-12">
+                        <div class="editor-label">
+                            KW Gasto
+                        </div>
+                        <div class="editor-field">
+                            <input type="text" value="@ViewBag.maiorConsumo.kwGasto" class="form-control" disabled/>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-12">
+                        <div class="editor-label">
+                            Valor a pagar
+                        </div>
+                        <div class="editor-field">
+                            <input type="text" value="R$ @ViewBag.maiorConsumo.valorAPagar" class="form-control" disabled/>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-12">
+                        <div class="editor-label">
+                            Data Pagamento
+                        </div>
+                        <div class="editor-field">
+                            <input type="text" value="@ViewBag.maiorConsumo.dataPagamento.ToString("dd/MM/yyyy")" class="form-control" disabled/>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-12">
+                        <div class="editor-label">
+                            Média de Consumo
+                        </div>
+                        <div class="editor-field">
+                            <input type="text" value="@ViewBag.maiorConsumo.mediaConsumo" class="form-control" disabled/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

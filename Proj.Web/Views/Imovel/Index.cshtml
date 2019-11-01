@@ -1,0 +1,53 @@
+@model IEnumerable<Proj.Domain.Entities.Imovel>
+
+<h2 class="text-center">Imóveis</h2>
+<p class="d-block text-right">
+    @Html.ActionLink("Adicionar Imovel", "Create", new {}, new { @class = "btn btn-outline-info" })
+</p>
+<table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>ID</th>
+            <th>Identificação</th>
+            <th>Estado</th>
+            <th>Cidade</th>
+            <th>Bairro</th>
+            <th>Número</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th>@item.id</th>
+                <td>@item.identificacao</td>
+                <td>@item.estado</td>
+                <td>@item.cidade</td>
+                <td>@item.bairro</td>
+                <td>@item.numero</td>
+                <td class="text-center">
+                    <a class="btn btn-outline-success" 
+                        asp-controller="Imovel" 
+                        asp-action="View" 
+                        asp-route-id="@item.id"><i class="fas fa-eye"></i></a>
+
+                    <a class="btn btn-outline-primary mx-2" 
+                        asp-controller="Imovel" 
+                        asp-action="Update" 
+                        asp-route-id="@item.id"><i class="fas fa-edit"></i></a>
+
+                    <a class="btn btn-outline-danger" 
+                        asp-controller="Imovel" 
+                        asp-action="Delete" 
+                        asp-route-id="@item.id"><i class="fas fa-trash-alt"></i></a>
+                </td>
+            </tr>
+        }
+        @if (!Model.Any())
+        {
+            <td colspan="7" class="text-center"> Nenhum registro cadastrado </td>
+        }
+    </tbody>
+</table>
